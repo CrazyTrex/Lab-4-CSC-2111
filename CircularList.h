@@ -1,3 +1,8 @@
+/*
+	Elias Bradey & Adam Rucker
+	2/9/2017
+	Lab 4 / Circular List Lab
+*/	
 #if !defined CIRCULARLIST_H
 #define CIRCULARLIST_H
 
@@ -134,7 +139,7 @@ void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
 }
 //Ok so the remove function now works after having it crash during the class
 //Dr. Brown was helpful when he said it was a code issue it happened to be that
-//When we deleted loc, it then set loc for the program to null.
+//When we deleted loc, it loc after the remove = NULL.
 //After the remove function a different function tried to access the data at loc and this caused it to try and grab data in NULL and this crashed the program
 
 //to fix these issues loc is now set to the next location in the list. So if I delete the item at 5 it will choose an item at 6 or 1 depending on the size;
