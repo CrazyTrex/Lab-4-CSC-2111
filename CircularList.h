@@ -7,8 +7,7 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Update.h"
-using namespace std;
-#include <iostream>
+
 template < class T >
 class CircularList : public Drawable
 {
@@ -150,24 +149,27 @@ void CircularList<T>::remove(int index)
 		loc_pos = 0;
 		loc->setNext(NULL);
 		loc->setPrev(NULL);
+		delete loc;
 	}
       else
       {
          //use local variables
-		DoubleNode<T>* curr = loc;
+		DoubleNode<T>* curr = find(index);
 		DoubleNode<T>* prev = curr->getPrev();
 		DoubleNode<T>* next = curr->getNext();
 		prev->setNext(next);
 		next->setPrev(prev);
-		cout<<"Working until the end of the else\n";
+		
+		curr->setNext(NULL);
+		curr->setPrev(NULL);
+		delete curr;
+		if(loc_pos == sze)
+			loc_pos = sze -1;
+		loc = next;
       }
-	  cout<<"Made it to the delete\n";
-	  delete loc;
-	  cout<<"completed the delete\n";
+	  
       sze--;
 	}
-   cout<<"The remove function completed without a problem\n";
-   
 }
 
 template < class T >
