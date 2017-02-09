@@ -7,7 +7,8 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Update.h"
-
+using namespace std;
+#include <iostream>
 template < class T >
 class CircularList : public Drawable
 {
@@ -61,19 +62,23 @@ DoubleNode<T>* CircularList<T>::find(int index)
  
    if (index >= loc_pos)
    {
-                                    //distance without the bridge (next refs, positive)
-                                    //distance using the bridge (prev refs, negative)
+        dist_next = index-loc_pos;                            //distance without the bridge (next refs, positive)
+        dist_prev = (size()-index)- loc_pos;                         //distance using the bridge (prev refs, negative)
    }
    else
    {
-                                    //distance without the bridge (prev refs, negative)
-                                    //distance using the bridge (next refs, positive)
+        dist_next =  (index-1)+loc_pos;                            //distance without the bridge (prev refs, negative)
+        dist_prev = index-loc_pos;                            //distance using the bridge (next refs, positive)
    }
 
    //DO THIS which distance is smaller?
    //find the minimum distance using absolute value
    //set min_dist to the smaller value, keeping the sign
-
+	if(abs(dist_next) < abs(dist_prev))
+	{
+		min_dist = dist_next;
+	}else
+		min_dist = dist_prev;
 
 
 
@@ -135,31 +140,34 @@ void CircularList<T>::remove(int index)
    //DO THIS
    //remember to move loc and loc_pos to the location of the removal
    //remember to delete the node after it has been removed from the list
+   
    if (index >= 1 && index <= sze) 
    {
-
-      if (sze == 1) //special case
-      {
-
-
-
-
-
-
-      }
+	  loc = find(index);
+	  loc_pos = index;
+	if (sze == 1) //special case
+    {
+		loc_pos = 0;
+		loc->setNext(NULL);
+		loc->setPrev(NULL);
+	}
       else
       {
          //use local variables
-
-
-
-
-
-
-
+		DoubleNode<T>* curr = loc;
+		DoubleNode<T>* prev = curr->getPrev();
+		DoubleNode<T>* next = curr->getNext();
+		prev->setNext(next);
+		next->setPrev(prev);
+		cout<<"Working until the end of the else\n";
       }
+	  cout<<"Made it to the delete\n";
+	  delete loc;
+	  cout<<"completed the delete\n";
       sze--;
-   } 
+	}
+   cout<<"The remove function completed without a problem\n";
+   
 }
 
 template < class T >
