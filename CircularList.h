@@ -132,7 +132,12 @@ void CircularList<T>::animateMovement(bool clockwise, DoubleNode<T>* where)
       //Sleep(100);
    }
 }
+//Ok so the remove function now works after having it crash during the class
+//Dr. Brown was helpful when he said it was a code issue it happened to be that
+//When we deleted loc, it then set loc for the program to null.
+//After the remove function a different function tried to access the data at loc and this caused it to try and grab data in NULL and this crashed the program
 
+//to fix these issues loc is now set to the next location in the list. So if I delete the item at 5 it will choose an item at 6 or 1 depending on the size;
 template < class T >
 void CircularList<T>::remove(int index) 
 {
